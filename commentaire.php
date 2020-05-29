@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(isset($_POST['deco']))
+    {
+        session_destroy();
+        header('location:index.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,6 +25,26 @@
                 <input type="button" value="Poster" name="valider">
             </p>
         </form>
+        <?php
+            $bdd = mysqli_connect('localhost', 'root', '', 'livreor');
+
+            if (isset($_POST['valider']))
+            {
+                $commentaire = $_POST['com'];
+                $utilisateur = $_SESSION['id'];
+                $date = Date("d/m/Y H:i:s");
+
+                $requetecom = "INSERT INTO commentaires VALUE (null, "$commentaire", "$utilisateur", "$date")";
+                $ajoutcom = mysqli_query($bdd, $requetecom);
+                header('Location:livre-or.php');
+            }
+            else
+            {
+                echo 'petit prob test';
+            }
+
+            mysqli_close($bdd)
+        ?>
     </main>
     <footer>
         <?php include("include/header.php") ?>

@@ -37,7 +37,7 @@
                 {
                     if ($_POST['password'] == $_POST['confpw'])
                     {
-                        $cryptmdp = password_hash($mdp, PASSWORD_BCRYPT)
+                        $cryptmdp = password_hash($mdp, PASSWORD_BCRYPT);
                         $ajoutbdd = 'INSERT INTO utilisateurs VALUE (null, "'.$login.'", "'.$cryptmdp.'")';
                         $ajout = mysqli_query($bdd, $ajoutbdd);
                     }

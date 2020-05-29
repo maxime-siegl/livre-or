@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(isset($_POST['deco']))
+    {
+        session_destroy();
+        header('location:index.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -23,6 +31,58 @@
             </p>
             <input type="button" value="Modifier" name="modifier">
         </form>
+        <?php
+            if (isset($_SESSION['login']))
+            {
+                $bdd = mysqli_connect('localhost', 'root', '', 'livreor');
+                $infologin = "SELECT * FROM utilisateurs WHERE login = '$_SESSION['login']'";
+                $recupinfo = mysqli_query($bdd, $infologin);
+                $info_utilisateur = mysqli_fetch_all($recupinfo, MYSQLI_ASSOC);
+
+                if (isset($_POST['modifier'] AND !empty($_POST['login'])))
+                {
+                    if (password_verify($_POST['mdpactuel'], $_SESSION['password']))
+                    {
+                        $login = $_POST['login'];
+                        $id = $_SESSION['id'];
+                        $veriflog = "SELECT count(*) AS num FROM utilisateurs WHERE login = '$login'";
+                        $verif = mysqli_query($bdd, $veriflog);
+                        $infolog = mysqli_fetch_all($verif, MYSQLI_ASSOC);
+                    
+                        if ($infolog[0]['num'] == 0 OR $login == $_SESSION['login'])
+                        {
+                            $update = "UPDATE utilisateurs SET login = '$login' WHERE id = '$id'";
+                            $up = mysqli_query($bdd, $update);
+                            $_SESSION['login'] = $_POST['login'];
+                            echo 'Modification acceptée.';
+                        }
+                        else
+                        {
+                            echo 'Login pas disponible'
+                        }
+
+                        if(isset($_POST['newmdp']) AND !empty($_POST['newmdp']))
+                        {
+                            if ($_POST['newmdp'] == $_POST['confnewmdp'])
+                            {
+                                $mdpupdate = password_hash($_POST['newmdp'], PASSWORD_DEFAULT);
+                                $mdpup = "UPDATE utilisateurs SET password = '$mdpupdate' WHERE id = '$id'";
+                                $querymdpup = mysqli_query($bdd, $mdpup);
+                            }
+                            else
+                            {
+                                echo 'les mots de passe ne correspondent pas, réessayez.';
+                            }
+                        }
+                        header('location:profil.php');
+                    }
+                    else
+                    {
+                        echo 'Mot de passe incorrect.';
+                    }
+                }
+            }
+        ?>
     </main>
     <footer>
         <?php include("include/header.php") ?>
