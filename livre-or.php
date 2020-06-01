@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,18 +14,29 @@
     </header>
     <main>
         <?php
-            if (isset($_SESSION['login']))
+            $bdd = mysqli_connect('localhost', 'root', '', 'livreor');
+            $com = "SELECT commentaires.commentaire, date, utilisateurs.login FROM commentaires INNER JOIN utilisateurs ON commentaires.id_utilisateur = utilisateurs.id ORDER BY date DESC";
+            $querycom = mysqli_query($bdd, $com);
+            $recupcominfo = mysqli_fetch_all($querycom, MYSQLI_ASSOC);
+
+            foreach ($recupcominfo as $recupcom) 
             {
-                $bdd = myqli_connect('localhost', 'root', '', 'livreor');
-                $com = "SELECT commentaire, id_utilisateur, date FROM commentaires WHERE ... ORDER BY date"; // selectionner le tableau commentaire par ordre de date du plus recent au plus ancien et où les id_utilisateur = login
-                $querycom = mysqli_query($bdd, $com);
-                $recupcom = mysqli_fetch_all($querycom, MYSQLI_ASSOC);
-                echo $recupcom;
+                $date = date('d/m/Y' , strtotime($recupcom["date"]));
+        ?>
+        <section>
+            <h4>
+                Commentaire de <?php echo $recupcom['login']; ?>, posté le <?php echo $date; ?>
+            </h4>
+            <p>
+                <?php echo $recupcom['commentaire']; ?>
+            </p>
+        </section>
+        <?php
             }
         ?>
     </main>
     <footer>
-        <?php include("include/header.php") ?>
+        <?php include("include/footer.php") ?>
     </footer>
 </body>
 </html>

@@ -18,36 +18,29 @@
         <?php include("include/header.php") ?>
     </header>
     <main>
-        <form action="livre-or.php" method="POST">
+        <form action="commentaire.php" method="POST">
             <p>
                 <label for="com">Laissez vos commentaires ici:</label>
-                <textarea name="com" id="com" cols="30" rows="10" placehorder="Entrer votre commentaire..."></textarea>
-                <input type="button" value="Poster" name="valider">
+                <textarea name="com" id="com" cols="40" rows="15" placehorder="Entrer votre commentaire..."></textarea>
+                <input type="submit" value="Poster" name="valider">
             </p>
         </form>
         <?php
-            $bdd = mysqli_connect('localhost', 'root', '', 'livreor');
-
-            if (isset($_POST['valider']))
+            if (isset($_POST['valider']) AND !empty($_POST['com']))
             {
                 $commentaire = $_POST['com'];
                 $utilisateur = $_SESSION['id'];
-                $date = Date("d/m/Y H:i:s");
-
-                $requetecom = "INSERT INTO commentaires VALUE (null, "$commentaire", "$utilisateur", "$date")";
+                
+                $bdd = mysqli_connect("localhost", "root", "", "livreor");
+                $requetecom = "INSERT INTO commentaires (commentaire, id_utilisateur, date) VALUES ('$commentaire', $utilisateur, NOW())";
                 $ajoutcom = mysqli_query($bdd, $requetecom);
+                mysqli_close($bdd);
                 header('Location:livre-or.php');
             }
-            else
-            {
-                echo 'petit prob test';
-            }
-
-            mysqli_close($bdd)
         ?>
     </main>
     <footer>
-        <?php include("include/header.php") ?>
+        <?php include("include/footer.php") ?>
     </footer>
 </body>
 </html>

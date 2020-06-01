@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if (isset($_POST['deco']))
+    {
+        session_destroy();
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,14 +18,14 @@
     </header>
     <main>
         <h1>
-            En route vers la belle vie!
+            Le Goût de l'Aventure !!
         </h1>
         <?php
             if(isset($_SESSION['login']) == false) // pas de login pas de connexion
             {
         ?>
             <p>
-                Avant toute chose commençons par vous créer un compte. Je vous invite à vous rendre sur le formualire d'<a href="inscription.php">inscription</a>
+                Avant toute chose commençons par vous créer un compte. Je vous invite à vous rendre sur notre page d'<a href="inscription.php">inscription</a>
             </p>
         <?php
             }
@@ -28,12 +35,15 @@
         <p>
             Sur la route du bonheur pensez à nous laisser un petit <a href="commentaire.php">commentaire <span id="ici">ici</span></a>
         </p>
+        <p>
+            Comment tu vas <?php echo $_SESSION['login']; ?> ?
+        </p>
         <?php
             }
-        ?>    
+        ?>
     </main>
     <footer>
-        <?php include("include/header.php") ?>
+        <?php include("include/footer.php") ?>
     </footer>
 </body>
 </html>

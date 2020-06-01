@@ -18,34 +18,21 @@
         <?php include("include/header.php") ?>
     </header>
     <main>
-        <form action="profil.php" mathod="POST">
-            <p>
-                <label for="login">Login</label>
-                <input type="text" name="login" id="login">
-                <label for="mdpactuel">Mot de Passe actuel</label>
-                <input type="password" name="mdpactuel" id="mdpactuel">
-                <label for="newmdp">Nouveau Mot de Passe</label>
-                <input type="password" name="newmdp" id="newmdp">
-                <label for="confnewmdp">Confirmation du Nouveau Mot de Passe</label>
-                <input type="password" name="confnewmdp" id="confnewmdp">
-            </p>
-            <input type="button" value="Modifier" name="modifier">
-        </form>
         <?php
             if (isset($_SESSION['login']))
             {
-                $bdd = mysqli_connect('localhost', 'root', '', 'livreor');
-                $infologin = "SELECT * FROM utilisateurs WHERE login = '$_SESSION['login']'";
+                $bdd = mysqli_connect("localhost", "root", "", "livreor");
+                $infologin = "SELECT * FROM utilisateurs WHERE login = '".$_SESSION['login']."' ";
                 $recupinfo = mysqli_query($bdd, $infologin);
                 $info_utilisateur = mysqli_fetch_all($recupinfo, MYSQLI_ASSOC);
 
-                if (isset($_POST['modifier'] AND !empty($_POST['login'])))
+                if (isset($_POST['modifier']) AND !empty($_POST['login']) AND !empty($_POST['mdpactuel'])) 
                 {
                     if (password_verify($_POST['mdpactuel'], $_SESSION['password']))
                     {
                         $login = $_POST['login'];
                         $id = $_SESSION['id'];
-                        $veriflog = "SELECT count(*) AS num FROM utilisateurs WHERE login = '$login'";
+                        $veriflog = "SELECT COUNT(*) AS num FROM utilisateurs WHERE login = '$login'";
                         $verif = mysqli_query($bdd, $veriflog);
                         $infolog = mysqli_fetch_all($verif, MYSQLI_ASSOC);
                     
@@ -58,14 +45,14 @@
                         }
                         else
                         {
-                            echo 'Login pas disponible'
+                            echo 'Login pas disponible';
                         }
 
                         if(isset($_POST['newmdp']) AND !empty($_POST['newmdp']))
                         {
                             if ($_POST['newmdp'] == $_POST['confnewmdp'])
                             {
-                                $mdpupdate = password_hash($_POST['newmdp'], PASSWORD_DEFAULT);
+                                $mdpupdate = password_hash($_POST['newmdp'], PASSWORD_BCRYPT);
                                 $mdpup = "UPDATE utilisateurs SET password = '$mdpupdate' WHERE id = '$id'";
                                 $querymdpup = mysqli_query($bdd, $mdpup);
                             }
@@ -83,9 +70,22 @@
                 }
             }
         ?>
+        <form action="profil.php" method="POST">
+            <p>
+                <label for="login">Login</label>
+                <input type="text" name="login" id="login" value="<?php echo $info_utilisateur[0]['login'] ?>" >
+                <label for="mdpactuel">Mot de Passe actuel</label>
+                <input type="password" name="mdpactuel" id="mdpactuel">
+                <label for="newmdp">Nouveau Mot de Passe</label>
+                <input type="password" name="newmdp" id="newmdp">
+                <label for="confnewmdp">Confirmation du Nouveau Mot de Passe</label>
+                <input type="password" name="confnewmdp" id="confnewmdp">
+            </p>
+            <input type="submit" value="Modifier" name="modifier">
+        </form>
     </main>
     <footer>
-        <?php include("include/header.php") ?>
+        <?php include("include/footer.php") ?>
     </footer>
 </body>
 </html>
