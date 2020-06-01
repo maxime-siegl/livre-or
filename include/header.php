@@ -1,8 +1,8 @@
 <section id="menu">
     <ul>
-        <li>Accueil</li>
-        <li>Livre d'Or</li>
-        <li>Profil</li>
+        <li><a href="index.php">Accueil</a></li>
+        <li><a href="livre-or.php">Livre d'Or</a></li>
+        <li><a href="profil.php">Profil</a></li>
         <li>
         <?php
             if (isset($_SESSION['login']))
@@ -13,8 +13,16 @@
             </form>
         <?php
             }
+            else
+            {
+        ?>
+                <form action="connexion.php">
+                    <input type="submit" name="connexion" value="Connexion">
+                </form>
+        <?php
+            }
         ?>
         </li>
     </ul>
 </section>
-<h1>Les Arts Culinères Chez Soi</h1>
+<h1>Les Arts Culinaires Chez Soi</h1>

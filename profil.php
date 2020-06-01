@@ -68,9 +68,8 @@
                         echo 'Mot de passe incorrect.';
                     }
                 }
-            }
         ?>
-        <form action="profil.php" method="POST">
+        <form action="profil.php" method="POST" class="formulaire">
             <p>
                 <label for="login">Login</label>
                 <input type="text" name="login" id="login" value="<?php echo $info_utilisateur[0]['login'] ?>" >
@@ -80,9 +79,20 @@
                 <input type="password" name="newmdp" id="newmdp">
                 <label for="confnewmdp">Confirmation du Nouveau Mot de Passe</label>
                 <input type="password" name="confnewmdp" id="confnewmdp">
+                <input type="submit" value="Modifier" name="modifier" class="submit">
             </p>
-            <input type="submit" value="Modifier" name="modifier">
         </form>
+        <?php
+            }
+            else
+            {
+        ?>
+            <p>
+            Pensez à vous connecter, ou à vous inscrire si vous êtes nouveau ici!!
+            </p>
+        <?php
+            }
+        ?>
     </main>
     <footer>
         <?php include("include/footer.php") ?>

@@ -1,0 +1,199 @@
+body {
+    background-image: url('img/back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/*Début header*/
+header {
+    border: 1px black solid;
+    border-radius: 15px;
+    box-shadow: 3px 3px 3px black;
+}
+
+#menu {
+    display: flex;
+}
+
+#menu ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 96%;
+}
+
+#menu ul li {
+    display: flex;
+    list-style-type: none;
+    width: 96%;
+    text-align: center;
+
+}
+
+header a {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    background-color: rgba(212, 145, 11, 0.555);
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+header input {
+    border-radius: 50%;
+    height: 96%;
+    background-color: rgba(212, 145, 11, 0.555);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+header input:hover {
+    cursor: pointer;
+    background-color: rgba(199, 119, 0, 0.9);
+    color: rgb(0, 113, 199, 0.777);
+    box-shadow: 5px 5px 5px rgb(255, 163, 25);
+}
+
+header a:hover {
+    background-color: rgba(199, 119, 0, 0.9);
+    color: rgb(0, 113, 199, 0.777);
+    box-shadow: 5px 5px 5px rgb(255, 163, 25);
+
+}
+
+header h1 {
+    text-align: center;
+    color: rgb(228, 194, 83);
+}
+/*Fin header*/
+
+/*img index*/
+#toque {
+    display: flex;
+    justify-content: center;
+    margin-left: 43%;
+    width: 13vw;
+    height: 20vh;
+    margin-top: 3%;
+    border-radius: 20px;
+}
+/*Fin img index*/
+
+/*Début main*/
+main h1 {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(219, 203, 173, 0.5);
+    border-radius: 15px;
+    width: 40%;
+    margin-left: 30%;
+    backdrop-filter: blur(3px);
+    color: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px rgb(255, 163, 25);
+}
+
+.formulaire p {
+    display: flex;
+    flex-direction: column;
+    width: 96%;
+    align-items: center;
+}
+
+.formulaire input {
+    margin-bottom: 2%;
+    border-radius: 10px;
+}
+
+p {
+    text-align: center;
+    backdrop-filter: blur(5px);
+    width: 96%;
+    color: white;
+    text-shadow: 5px 5px 5px black;
+    font-size: 1.2em;
+}
+
+main a {
+    text-decoration: none;
+    color: white;
+}
+
+main a:hover {
+    font-weight: bold;
+    color: rgb(228, 194, 83);
+}
+
+textarea {
+    border-radius: 15px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.submit {
+    background-color: rgba(212, 145, 11, 0.555);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.submit:hover {
+    cursor: pointer;
+    background-color: rgba(199, 119, 0, 0.9);
+    color: rgb(0, 113, 199, 0.777);
+    box-shadow: 5px 5px 5px rgb(255, 163, 25);
+}
+/*Fin main*/
+
+/*Début footer*/
+footer {
+    border: 1px black solid;
+    border-radius: 15px;
+    box-shadow: -3px -3px 3px black;
+    background-color: rgba(255, 255, 255, 0.50);
+}
+
+#fullfooter ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 96%;
+    align-items: baseline;
+    text-align: center;
+}
+
+#fullfooter ul li {
+    backdrop-filter: blur(3px);
+}
+
+#footer_accueil {
+    display: flex;
+    flex-direction: column;
+}
+
+#created {
+    display: flex;
+    flex-direction: column;
+}
+
+#reseau {
+    display: flex;
+    flex-direction: column;
+}
+
+footer li {
+    list-style-type: none;
+}
+
+footer a {
+    text-decoration: none;
+    background-color: rgba(212, 145, 11, 0.555);
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+footer a:hover {
+    background-color: rgba(199, 119, 0, 0.9);
+    color: rgb(0, 113, 199, 0.777);
+    box-shadow: 5px 5px 5px rgb(255, 163, 25);
+}
+/*Fin footer*/

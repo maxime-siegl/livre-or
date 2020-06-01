@@ -1,18 +1,26 @@
 <section id="fullfooter">
     <ul>
-        <li>Accueil</li>
-        <li>Ne partez pas sans un petit commentaire !!
-            <ul>
-                <li><a href="livreor.php">Livre d'Or</a></li>
-            </ul>
-        </li>
-        <li> Created by Maxime
-            <ul>
-                <li>Un peu plus loin dans mes jobs?</li>
-                <li>Mon <a href="github">Github</a></li>
-                <li>Mes réseaux:</li>
-                <li><a href="facebook">Facebook</a><a href="twitter">Twitter</a></li>
-            </ul>
-        </li>
+        <section id="footer_accueil">
+            <h4>Accès Rapide</h4>
+            <li><a href="index.php">Accueil</a></li>
+        </section>
+        <section id="footer_com">
+            <h4>Ne partez pas sans un petit commentaire !!</h4>
+            <li><a href="livre-or.php">Livre d'Or</a></li>
+        </section>
+        <section id="created">
+            <h4> Created by Maxime</h4>
+            <li>Un peu plus loin dans mes jobs?</li>
+            <li>Mon <a href="https://github.com/maxime-siegl">Github</a></li>
+        </section>
+        <section id="reseau">
+            <h4>Mes réseaux:</h4>
+            <li>
+                <a href="https://www.facebook.com/profile.php?id=100007022178050">Facebook</a>
+            </li>
+            <li>
+                <a href="https://twitter.com/MaximeSiegl">Twitter</a>
+            </li>
+        </section>
     </ul>
 </section>

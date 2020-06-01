@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if (isset($_POST['deco']))
+    {
+        session_destroy();
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,42 +25,54 @@
                 <input type="password" name="password" id="password">
                 <label for="confpw">Confirmation Mot de Passe</label>
                 <input type="password" name="confpw" id="confpw">
-                <input type="submit" value="S'inscrire" name="inscription">
+                <input type="submit" value="S'inscrire" name="inscription" class="submit">
             </p>
         </form>
         <?php
             $bdd = mysqli_connect("localhost", "root", "", "livreor");
 
-            if (isset($_POST['inscription']))
+            if (isset($_SESSION['login']) == false)
             {
-                $login = $_POST['login'];
-                $mdp = $_POST['password'];
-
-                $checklogin = "SELECT login FROM utilisateurs WHERE login = '$login'";
-                $query = mysqli_query($bdd, $checklogin);
-                $veriflogin = mysqli_fetch_all($query);
-
-                if (empty($veriflogin))
+                if (isset($_POST['inscription']))
                 {
-                    if ($_POST['password'] == $_POST['confpw'])
+                    $login = $_POST['login'];
+                    $mdp = $_POST['password'];
+
+                    $checklogin = "SELECT login FROM utilisateurs WHERE login = '$login'";
+                    $query = mysqli_query($bdd, $checklogin);
+                    $veriflogin = mysqli_fetch_all($query);
+
+                    if (empty($veriflogin))
                     {
-                        $cryptmdp = password_hash($mdp, PASSWORD_BCRYPT);
-                        $ajoutbdd = 'INSERT INTO utilisateurs VALUES (null, "'.$login.'", "'.$cryptmdp.'")';
-                        $ajout = mysqli_query($bdd, $ajoutbdd);
-                        header('location:connexion.php');
+                        if ($_POST['password'] == $_POST['confpw'])
+                        {
+                            $cryptmdp = password_hash($mdp, PASSWORD_BCRYPT);
+                            $ajoutbdd = 'INSERT INTO utilisateurs VALUES (null, "'.$login.'", "'.$cryptmdp.'")';
+                            $ajout = mysqli_query($bdd, $ajoutbdd);
+                            header('location:connexion.php');
+                        }
+                        else
+                        {
+                           echo 'La mot de passe et sa confirmation ne sont pas semblable. Réessayez.';
+                        }
                     }
                     else
-                    {
-                        echo 'La mot de passe et sa confirmation ne sont pas semblable. Réessayez.';
+                    {   
+                        echo 'login pas disponible, trouvez-en un autre.';
                     }
                 }
-                else
-                {   
-                    echo 'login pas disponible, trouvez-en un autre.';
-                }
+                mysqli_close($bdd);
             }
-            mysqli_close($bdd);
+            else
+            {
         ?>
+            <p>
+                Vous êtes déjà inscrit, passez plutôt sur notre <a href="livre-or.php">livre d'or</a> pour y laisser un commentaire
+            </p>
+        <?php
+            }
+        ?>
+
     </main>
     <footer>
         <?php include("include/footer.php") ?>

@@ -17,6 +17,7 @@
         <?php include("include/header.php") ?>
     </header>
     <main>
+        <img src="img/toque.jpg" alt="toque" id="toque">
         <h1>
             Le Goût de l'Aventure !!
         </h1>
