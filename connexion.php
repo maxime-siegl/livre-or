@@ -62,7 +62,7 @@
                         else
                         {
     ?>
-                        <p>>Le mot de passe n'est pas lié a ce login là !!</p>
+                        <p>Le mot de passe n'est pas lié a ce login là !!</p>
     <?php
                         }
                     }
